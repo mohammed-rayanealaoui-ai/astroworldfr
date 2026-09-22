@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Solar System Explorer</title>
+<link rel="stylesheet" href="style45.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+<div id="home" class="screen home-screen">
+  <div class="stars"></div><div class="nebula n1"></div><div class="nebula n2"></div>
+  <div class="orbit o1"><i></i></div><div class="orbit o2"><i></i></div><div class="orbit o3"><i></i></div>
+  <main class="hero">
+    <div class="eyebrow">✦ SOLAR SYSTEM EXPLORER</div>
+    <h1>Explore the universe<br><span>one world at a time.</span></h1>
+    <p>Découvre les planètes, le Soleil et les galaxies dans une expérience interactive pensée pour explorer l'espace.</p>
+    <div class="actions"><button class="primary" id="loginBtn">Se connecter</button><button class="secondary" id="registerBtn">Créer un compte</button></div>
+    <div class="quick">☉ Soleil &nbsp; • &nbsp; 8 planètes &nbsp; • &nbsp; Galaxies &nbsp; • &nbsp; Missions spatiales</div>
+  </main>
+</div>
+
+<div id="auth" class="screen auth-screen hidden">
+  <button class="back" id="backHome">← Accueil</button>
+  <div class="auth-card">
+    <div class="auth-mark">✦</div>
+    <h2 id="authTitle">Bienvenue dans l'espace</h2><p id="authSubtitle">Connecte-toi pour accéder à l'exploration interactive.</p>
+    <div class="tabs"><button id="loginTab" class="active">Se connecter</button><button id="registerTab">Créer un compte</button></div>
+    <div id="loginPanel">
+      <label>Email</label><input id="loginEmail" type="email" placeholder="nom@gmail.com">
+      <label>Mot de passe</label><input id="loginPassword" type="password" placeholder="••••••••">
+      <button class="primary full" id="emailLogin">Se connecter</button>
+      <div class="divider"><span>ou</span></div>
+      <div id="googleLogin"></div>
+    </div>
+    <div id="registerPanel" class="hidden">
+      <label>Nom</label><input id="registerName" type="text" placeholder="Ton nom">
+      <label>Gmail</label><input id="registerEmail" type="email" placeholder="nom@gmail.com">
+      <label>Mot de passe</label><input id="registerPassword" type="password" placeholder="••••••••">
+      <button class="primary full" id="emailRegister">Créer mon compte</button>
+      <div class="divider"><span>ou</span></div>
+      <div id="googleRegister"></div>
+    </div>
+    <p id="authMsg" class="msg"></p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+  <header class="topbar"><div class="brand">✦ SOLAR EXPLORER</div><nav><button data-section="welcome" class="nav-home active"><span>⌂</span> Accueil</button><button data-section="planets">Planètes</button><button data-section="sun">Soleil</button><button data-section="galaxies">Galaxies</button></nav><div class="account"><img id="avatar" src="" alt=""><span id="accountName">Explorateur</span><button id="logout">Déconnexion</button></div></header>
+  <main>
+    <section id="welcome" class="section welcome-section active">
+      <div class="welcome-bg"></div>
+      <div class="welcome-hero">
+        <div class="welcome-copy">
+          <span class="eyebrow">✦ ACCUEIL · EXPLORATION SPATIALE</span>
+          <h1>Bienvenue dans<br><span>le Système solaire.</span></h1>
+          <p>Explore les mondes qui nous entourent, découvre les grandes missions spatiales et plonge dans les images de l’exploration humaine et robotique.</p>
+          <div class="welcome-actions">
+            <button class="primary" data-go-section="planets">Explorer les planètes →</button>
+            <button class="secondary" data-go-section="missions">Voir les missions</button>
+          </div>
+        </div>
+        <div class="welcome-earth" aria-label="La Terre vue depuis l'espace">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="La Terre vue depuis Apollo 17">
+          <div class="welcome-orbit-ring"></div>
+          <div class="welcome-orbit-dot"></div>
+        </div>
+      </div>
+
+      <div class="welcome-stats">
+        <div><b>8</b><span>planètes</span></div>
+        <div><b>1</b><span>étoile · le Soleil</span></div>
+        <div><b>300+</b><span>missions robotiques au-delà de l'orbite terrestre</span></div>
+        <div><b>12</b><span>astronautes ont marché sur la Lune</span></div>
+      </div>
+
+      <div class="welcome-block">
+        <div class="welcome-heading"><span class="detail-label">À DÉCOUVRIR</span><h2>Un voyage de la Terre aux mondes lointains</h2><p>Chaque carte ouvre une histoire : un monde, une mission, une découverte ou une image.</p></div>
+        <div class="welcome-cards">
+          <article class="welcome-card photo-card earth-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Terre vue par Apollo 17">
+            <div><span>NOTRE MONDE</span><h3>La Terre</h3><p>Le seul monde où la vie est actuellement connue.</p><button data-go-section="planets">Découvrir →</button></div>
+          </article>
+          <article class="welcome-card photo-card mars-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Mars en couleur naturelle">
+            <div><span>PLANÈTE ROUGE</span><h3>Mars</h3><p>Des rovers parcourent sa surface pour comprendre son passé.</p><button data-open-planet="3">Explorer Mars →</button></div>
+          </article>
+          <article class="welcome-card photo-card moon-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Aldrin_Apollo_11_original.jpg" alt="Buzz Aldrin sur la Lune pendant Apollo 11">
+            <div><span>EXPLORATION HUMAINE</span><h3>Sur la Lune</h3><p>Apollo 11 a permis aux premiers humains de marcher sur un autre monde.</p><a href="https://www.nasa.gov/mission/apollo-11/" target="_blank" rel="noopener">Voir Apollo 11 →</a></div>
+          </article>
+        </div>
+      </div>
+
+      <div id="missions" class="welcome-block missions-block">
+        <div class="welcome-heading"><span class="detail-label">MISSIONS & EXPLORATEURS</span><h2>Des machines qui voyagent à notre place</h2><p>NASA et ses partenaires utilisent des sondes, orbiteurs et rovers pour étudier des mondes que nous ne pouvons pas encore visiter nous-mêmes.</p></div>
+        <div class="mission-home-grid">
+          <article><div class="mission-icon">🤖</div><span>JPL · MARS</span><h3>Curiosity & Perseverance</h3><p>Deux rovers étudient la géologie martienne et recherchent des indices sur l'histoire ancienne de Mars.</p><a href="https://mars.nasa.gov/mars2020/" target="_blank" rel="noopener">Mission Mars 2020 →</a></article>
+          <article><div class="mission-icon">🪐</div><span>JUPITER</span><h3>Juno</h3><p>La sonde Juno étudie Jupiter, son atmosphère, son champ magnétique et sa structure interne.</p><a href="https://science.nasa.gov/mission/juno/" target="_blank" rel="noopener">Découvrir Juno →</a></article>
+          <article><div class="mission-icon">🚀</div><span>ESPACE PROFOND</span><h3>Voyager</h3><p>Les sondes Voyager ont survolé les planètes géantes et poursuivent leur voyage vers l'espace interstellaire.</p><a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener">Voir Voyager →</a></article>
+          <article><div class="mission-icon">🌊</div><span>EUROPA</span><h3>Europa Clipper</h3><p>Cette mission étudie Europe, la lune glacée de Jupiter, et son environnement à la recherche d'indices sur son océan.</p><a href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener">Découvrir la mission →</a></article>
+        </div>
+      </div>
+
+      <div class="welcome-source"><span>Sources & images</span><a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener">NASA · Solar System Exploration →</a><a href="https://www.jpl.nasa.gov/images/" target="_blank" rel="noopener">NASA JPL · Image Gallery →</a></div>
+    </section>
+
+    <section id="planets" class="section planets-experience">
+      <div class="planet-space-bg"></div>
+      <div class="planet-experience-brand">SOLAR EXPLORER <span>IN ONLY CSS</span></div>
+      <div class="planet-list" id="planetList"></div>
+      <div class="planet-stage" id="planetStage"></div>
+      <div class="planet-copy" id="planetCopy">
+        <span class="planet-copy-kicker" id="planetType">PLANÈTE</span>
+        <button id="planetTitle" class="planet-title-button" type="button" aria-label="Ouvrir le dossier de Mercure">Mercure</button>
+        <p id="planetDescription"></p>
+        <button id="planetReadMore" class="planet-read-more">READ MORE</button>
+      </div>
+      <div class="planet-hint">Clique sur le nom d'une planète pour la faire avancer.</div>
+    </section>
+    <section id="sun" class="section"><div class="sun-layout"><div class="sun-visual"><div class="sun-core"></div></div><div><span class="eyebrow">L'ÉTOILE AU CENTRE</span><h2>Le Soleil</h2><p>Le Soleil est une étoile de type naine jaune qui contient l'immense majorité de la masse du Système solaire. Sa lumière met environ 8 min 20 s pour atteindre la Terre.</p><div class="facts"><div><b>1,39 million km</b><span>diamètre</span></div><div><b>≈ 5 500 °C</b><span>surface</span></div><div><b>≈ 150 millions km</b><span>Terre → Soleil</span></div></div></div></div></section>
+    <section id="galaxies" class="section"><span class="eyebrow">AU-DELÀ DU SYSTÈME SOLAIRE</span><h2>Les galaxies</h2><p>Une galaxie rassemble des étoiles, du gaz, de la poussière et de la matière noire. Voici quelques galaxies célèbres.</p><div class="galaxy-grid"><article><div class="galaxy-art spiral"></div><h3>Voie lactée</h3><p>Notre galaxie, une grande galaxie spirale qui contient notre Système solaire.</p></article><article><div class="galaxy-art andromeda"></div><h3>Andromède</h3><p>Grande galaxie spirale voisine de la Voie lactée, à environ 2,5 millions d'années-lumière.</p></article><article><div class="galaxy-art whirlpool"></div><h3>Galaxie du Tourbillon</h3><p>Une galaxie spirale spectaculaire située à environ 23 millions d'années-lumière.</p></article></div></section>
+  </main>
+
+  <section id="planetDetail" class="planet-detail hidden" aria-hidden="true">
+    <div class="detail-backdrop"></div>
+    <header class="detail-header">
+      <button id="detailBack" class="detail-back" type="button">← Retour aux planètes</button>
+      <div class="detail-brand">SOLAR EXPLORER <span>DOSSIER PLANÉTAIRE</span></div>
+    </header>
+    <div class="detail-scroll">
+      <div class="detail-hero">
+        <div id="detailVisual" class="detail-planet-visual"><div class="planet-surface"></div></div>
+        <div class="detail-hero-copy">
+          <span id="detailKicker" class="planet-copy-kicker">PLANÈTE</span>
+          <h1 id="detailTitle">Mercure</h1>
+          <p id="detailLead"></p>
+        </div>
+      </div>
+
+      <div class="detail-content">
+        <section class="detail-section intro-section">
+          <div><span class="detail-label">EN BREF</span><h2>Tout savoir sur <span id="detailNameInline">Mercure</span></h2></div>
+          <p id="detailOverview"></p>
+        </section>
+
+        <section class="detail-grid">
+          <article class="detail-panel"><span class="detail-label">CARACTÉRISTIQUES</span><div id="detailFacts" class="detail-facts"></div></article>
+          <article class="detail-panel"><span class="detail-label">SURFACE & ATMOSPHÈRE</span><h3 id="detailSurfaceTitle"></h3><p id="detailSurface"></p></article>
+        </section>
+
+        <section class="detail-section exploration-section">
+          <span class="detail-label">EXPLORATION</span>
+          <h2>Les grandes étapes de l'exploration</h2>
+          <div id="detailTimeline" class="mission-timeline"></div>
+        </section>
+
+        <section class="detail-grid">
+          <article class="detail-panel"><span class="detail-label">MISSIONS CLÉS</span><div id="detailMissions" class="mission-list"></div></article>
+          <article class="detail-panel"><span class="detail-label">EAU, VIE & HABITABILITÉ</span><p id="detailLife"></p><div class="science-note">⚠️ Une possibilité scientifique ou un indice d'habitabilité ne signifie pas que la vie y a été découverte.</div></article>
+        </section>
+
+        <section class="detail-section facts-section">
+          <span class="detail-label">À RETENIR</span>
+          <h2>Ce qui rend <span id="detailNameBottom">Mercure</span> unique</h2>
+          <ul id="detailHighlights" class="highlight-list"></ul>
+        </section>
+
+        <footer class="detail-footer">
+          <span>Sources scientifiques principales</span>
+          <a id="detailSource" href="#" target="_blank" rel="noopener">NASA Science →</a>
+        </footer>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const planets=[
+{name:'Mercure',type:'PLANÈTE ROCHEUSE',class:'mercury',sun:'57,9 M km',earth:'≈ 91,7 M km',desc:"Mercure est la plus petite planète et la plus proche du Soleil. Sa surface est couverte de cratères et ses températures varient énormément entre le jour et la nuit.",overview:"Mercure est un monde rocheux extrême. Elle possède une surface très ancienne, fortement cratérisée, une exosphère très ténue et un champ magnétique global faible. Sa proximité avec le Soleil rend son exploration particulièrement difficile.",surfaceTitle:"Un monde de cratères",surface:"La surface est dominée par des cratères, des plaines et de grandes falaises. Mercure n’a pas une atmosphère dense comme la Terre : elle possède une exosphère extrêmement ténue composée notamment d’atomes issus de la surface et du vent solaire.",facts:[['Diamètre','4 879 km'],['Année','88 jours terrestres'],['Rotation','58,6 jours'],['Distance au Soleil','57,9 M km'],['Température','≈ −180 à 430 °C'],['Lunes','0']],life:"Aucune vie n’a été découverte sur Mercure. Son environnement est considéré comme extrêmement hostile à la vie telle que nous la connaissons.",missions:[['1974–1975','Mariner 10','Premier engin spatial à visiter Mercure; il a réalisé plusieurs survols et cartographié une partie de sa surface.'],['2011–2015','MESSENGER','Premier orbiteur de Mercure; il a étudié sa géologie, son champ magnétique et sa composition.'],['Depuis 2018','BepiColombo','Mission conjointe ESA–JAXA conçue pour étudier Mercure avec deux orbiteurs scientifiques.']],timeline:[['1973','Lancement de Mariner 10','Première mission dédiée à Mercure.'],['1974','Premier survol','Mariner 10 transmet les premières images rapprochées de Mercure.'],['2011','Entrée en orbite','MESSENGER devient le premier engin à orbiter Mercure.'],['2015','Fin de MESSENGER','La mission s’achève après une cartographie et une étude détaillées de la planète.'],['2018','BepiColombo','Une nouvelle mission internationale part vers Mercure.']],highlights:['Mercure fait le tour du Soleil en seulement 88 jours.','Elle possède un champ magnétique malgré sa petite taille.','MESSENGER a révélé des dépôts brillants dans des cratères polaires en permanence dans l’ombre.'],source:'https://science.nasa.gov/mercury/exploration/'},
+{name:'Vénus',type:'PLANÈTE ROCHEUSE',class:'venus',sun:'108,2 M km',earth:'≈ 41,4 M km',desc:"Vénus possède une atmosphère très épaisse riche en CO₂. C’est la planète la plus chaude du Système solaire à sa surface.",overview:"Vénus est proche de la Terre par sa taille, mais son environnement est radicalement différent. Une atmosphère très épaisse riche en dioxyde de carbone provoque un puissant effet de serre, avec des températures de surface capables de faire fondre le plomb.",surfaceTitle:"Un paysage caché sous les nuages",surface:"Des nuages d’acide sulfurique enveloppent la planète. Les données radar ont révélé de vastes plaines volcaniques, des montagnes et de nombreux indices d’une activité volcanique passée ou récente.",facts:[['Diamètre','12 104 km'],['Année','224,7 jours terrestres'],['Rotation','243 jours terrestres'],['Distance au Soleil','108,2 M km'],['Température','≈ 465 °C'],['Lunes','0']],life:"Aucune vie n’a été confirmée sur Vénus. Des études examinent certaines hypothèses concernant ses nuages, mais aucune preuve de vie n’est établie.",missions:[['1962','Mariner 2','Premier survol réussi d’une autre planète et premières mesures directes de Vénus.'],['1970','Venera 7','Première sonde à transmettre des données depuis la surface d’une autre planète.'],['1990–1994','Magellan','Cartographie radar détaillée de la surface de Vénus.']],timeline:[['1962','Mariner 2','Premier succès d’une mission interplanétaire vers une autre planète.'],['1970','Venera 7','Premières données transmises depuis la surface de Vénus.'],['1990','Magellan','La cartographie radar révèle une grande partie du relief caché sous les nuages.']],highlights:['Vénus tourne sur elle-même dans le sens opposé à celui de la plupart des planètes.','Son atmosphère exerce une pression de surface environ 90 fois supérieure à celle de la Terre.','Elle est la planète la plus chaude du Système solaire à sa surface.'],source:'https://science.nasa.gov/venus/exploration/'},
+{name:'Terre',type:'PLANÈTE ROCHEUSE',class:'earth',sun:'149,6 M km',earth:'0 km',desc:"La Terre est notre planète, avec de l’eau liquide en surface, une atmosphère protectrice et une grande diversité d’écosystèmes.",overview:"La Terre est le seul monde connu où la vie est confirmée. Son exploration spatiale a transformé notre compréhension de l’atmosphère, des océans, des continents, du climat et des interactions entre les grands systèmes de la planète.",surfaceTitle:"Un monde d’eau et de vie",surface:"La surface de la Terre est composée de continents et d’océans. Son atmosphère, dominée par l’azote et l’oxygène, et son champ magnétique contribuent à protéger la surface d’une partie du rayonnement et du vent solaire.",facts:[['Diamètre','12 742 km'],['Année','365,25 jours'],['Rotation','23 h 56 min'],['Distance au Soleil','149,6 M km'],['Température moyenne','≈ 15 °C'],['Lune','1']],life:"La vie est confirmée sur Terre sous une immense diversité de formes. C’est actuellement le seul endroit connu de l’Univers où la vie est directement observée.",missions:[['1957','Spoutnik 1','Le premier satellite artificiel marque le début de l’ère spatiale et de l’observation systématique de la Terre depuis l’espace.'],['1968','Apollo 8','Les premiers humains à quitter l’orbite terrestre voient la Terre depuis l’orbite lunaire; la mission produit la célèbre image Earthrise.'],['Depuis les années 1970','Satellites d’observation','Des générations de satellites suivent les nuages, les océans, les terres, la glace et l’évolution du climat.']],timeline:[['1957','Début de l’ère spatiale','Spoutnik 1 ouvre la voie à l’observation de la Terre depuis l’espace.'],['1968','Apollo 8','Des humains voient la Terre depuis l’orbite lunaire et photographient Earthrise.'],['1970+','Observation de la Terre','Les satellites permettent de mesurer continuellement de nombreux paramètres terrestres.']],highlights:['La Terre possède de grandes quantités d’eau liquide en surface.','Elle est le seul monde connu avec une biosphère confirmée.','Les satellites permettent d’observer la planète comme un système connecté.'],source:'https://science.nasa.gov/earth/'},
+{name:'Mars',type:'PLANÈTE ROCHEUSE',class:'mars',sun:'227,9 M km',earth:'≈ 225 M km',desc:"Mars est une planète froide et désertique avec des volcans géants, des canyons et des traces d’eau ancienne.",overview:"Mars conserve les traces d’un passé où l’eau liquide était beaucoup plus présente. Elle est aujourd’hui froide, sèche et dotée d’une atmosphère très mince. Les robots l’explorent depuis des décennies pour comprendre son histoire et rechercher des indices d’ancienne habitabilité.",surfaceTitle:"Le monde rouge",surface:"La surface présente des volcans géants, de profondes vallées, des dunes, des calottes polaires et des terrains façonnés par l’eau ancienne. Olympus Mons est le plus grand volcan connu du Système solaire.",facts:[['Diamètre','6 779 km'],['Année','687 jours terrestres'],['Rotation','24 h 37 min'],['Distance au Soleil','227,9 M km'],['Température moyenne','≈ −63 °C'],['Lunes','2']],life:"Aucune vie martienne n’est confirmée. Les missions recherchent surtout des signes d’ancienne habitabilité et des biosignatures potentielles. Les découvertes de molécules organiques ou de structures intéressantes ne constituent pas, à elles seules, une preuve de vie.",missions:[['1965','Mariner 4','Premier survol réussi de Mars et premières images rapprochées d’une autre planète.'],['1976','Viking 1 & 2','Premiers atterrissages américains réussis; expériences sur le sol et recherche de signes de vie.'],['1997','Pathfinder / Sojourner','Le premier rover à se déplacer sur Mars démontre une nouvelle façon d’explorer la surface.'],['2021','Perseverance','Le rover explore Jezero, étudie les roches et collecte des échantillons destinés à une future étude sur Terre.']],timeline:[['1965','Mariner 4','Premier survol de Mars et premières images rapprochées.'],['1976','Viking','Premiers atterrissages américains réussis et premières expériences biologiques sur place.'],['1997','Sojourner','Début de l’ère des rovers mobiles sur Mars.'],['2021','Perseverance','Atterrissage dans le cratère Jezero et début d’une mission de recherche d’anciennes biosignatures.']],highlights:['Mars possède des indices géologiques d’une présence ancienne d’eau liquide.','Viking a lancé une recherche directe de signes de vie sur place.','Perseverance explore un ancien delta dans le cratère Jezero et collecte des échantillons.'],source:'https://science.nasa.gov/mars/exploration/'},
+{name:'Jupiter',type:'GÉANTE GAZEUSE',class:'jupiter',sun:'778,5 M km',earth:'≈ 629 M km',desc:"Jupiter est la plus grande planète. Elle possède une atmosphère turbulente et la célèbre Grande Tache rouge.",overview:"Jupiter est une géante gazeuse composée principalement d’hydrogène et d’hélium. Son atmosphère présente des bandes nuageuses, des tempêtes et la Grande Tache rouge. Ses lunes constituent aussi des mondes majeurs à explorer.",surfaceTitle:"Pas de sol solide accessible",surface:"Jupiter n’a pas de surface solide où un engin puisse se poser comme sur Mars. En descendant dans son atmosphère, la pression et la température augmentent fortement. La planète est entourée d’un système de lunes et d’anneaux ténus.",facts:[['Diamètre','≈ 139 820 km'],['Année','≈ 11,86 ans'],['Rotation','≈ 9 h 56 min'],['Distance au Soleil','778,5 M km'],['Grande Tache rouge','Tempête géante'],['Lunes','Nombre variable selon les découvertes']],life:"Aucune vie n’a été découverte sur Jupiter. Plusieurs de ses lunes, notamment Europe, sont étudiées parce qu’elles pourraient posséder des environnements souterrains intéressants pour l’astrobiologie.",missions:[['1973–1974','Pioneer 10 & 11','Premiers survols rapprochés de Jupiter par des sondes.'],['1979','Voyager 1 & 2','Images détaillées de Jupiter et de ses lunes, dont de nombreuses découvertes.'],['1995–2003','Galileo','Premier orbiteur de Jupiter; il déploie aussi une sonde atmosphérique.'],['Depuis 2016','Juno','Étudie la structure interne, le champ magnétique, les pôles et l’atmosphère de Jupiter.']],timeline:[['1610','Galilée','Les premières observations télescopiques détaillées révèlent les quatre grandes lunes galiléennes.'],['1973','Pioneer 10','Premier survol rapproché de Jupiter par une sonde.'],['1995','Galileo','Premier orbiteur de Jupiter.'],['2016','Juno','Entrée en orbite et début d’une étude détaillée de l’intérieur et de l’atmosphère.']],highlights:['Jupiter est la plus grande planète du Système solaire.','Sa rotation est si rapide qu’un jour y dure moins de 10 heures.','La lune Europe est une cible majeure de recherche sur les environnements potentiellement habitables.'],source:'https://science.nasa.gov/jupiter/exploration/'},
+{name:'Saturne',type:'GÉANTE GAZEUSE',class:'saturn',sun:'1,43 Md km',earth:'≈ 1,28 Md km',desc:"Saturne est célèbre pour son vaste système d’anneaux composé principalement de glace et de roche.",overview:"Saturne est une géante gazeuse entourée d’un système d’anneaux spectaculaire et de nombreuses lunes. La mission Cassini-Huygens a transformé notre compréhension de cette planète et de ses mondes satellites.",surfaceTitle:"Une géante entourée d’anneaux",surface:"Comme Jupiter, Saturne n’a pas de surface solide accessible. Ses anneaux sont constitués de milliards de fragments de glace et de roche. Les vents et les structures nuageuses de l’atmosphère sont étudiés depuis l’espace.",facts:[['Diamètre','≈ 116 460 km'],['Année','≈ 29,45 ans'],['Rotation','≈ 10,7 h'],['Distance au Soleil','1,43 Md km'],['Anneaux','Système complexe'],['Lunes','Nombre variable selon les découvertes']],life:"Aucune vie n’a été découverte sur Saturne. En revanche, ses lunes Titan et Encelade sont particulièrement importantes pour l’étude de la chimie prébiotique et des environnements susceptibles de soutenir des conditions habitables.",missions:[['1979','Pioneer 11','Premier passage rapproché de Saturne.'],['1980–1981','Voyager 1 & 2','Nouvelles observations des anneaux, de l’atmosphère et des lunes.'],['2004–2017','Cassini-Huygens','Première mission en orbite autour de Saturne; exploration intensive de son système.'],['2005','Huygens sur Titan','Premier atterrissage dans le système externe sur Titan et première descente sur une lune du système de Saturne.']],timeline:[['1979','Pioneer 11','Premier gros survol rapproché de Saturne.'],['1980–1981','Voyager','Les deux Voyager révèlent de nombreuses structures et lunes.'],['2004','Cassini','Arrivée en orbite et début de 13 années d’exploration.'],['2005','Huygens','Atterrissage sur Titan et étude de son atmosphère et de sa surface.'],['2017','Fin de Cassini','La sonde plonge volontairement dans Saturne après sa mission.']],highlights:['Les anneaux de Saturne sont composés principalement de glace et de roche.','Encelade possède un océan global sous sa croûte glacée et montre une activité hydrothermale probable.','Titan possède des lacs et mers de méthane liquide à sa surface.'],source:'https://science.nasa.gov/saturn/exploration/'},
+{name:'Uranus',type:'GÉANTE DE GLACE',class:'uranus',sun:'2,87 Md km',earth:'≈ 2,72 Md km',desc:"Uranus est une géante glacée bleu-vert qui tourne presque sur le côté, avec une inclinaison spectaculaire.",overview:"Uranus est une géante de glace très froide, entourée d’anneaux et de lunes. Sa rotation presque couchée lui donne des saisons extrêmes. Une seule sonde l’a visitée de près jusqu’à présent.",surfaceTitle:"Un monde incliné",surface:"Uranus est principalement composée d’hydrogène et d’hélium dans ses couches externes, avec un intérieur riche en eau, méthane et ammoniac sous des formes très différentes de celles rencontrées sur Terre. Le méthane atmosphérique contribue à sa couleur bleu-vert.",facts:[['Diamètre','≈ 50 724 km'],['Année','≈ 84 ans'],['Rotation','≈ 17 h 14 min'],['Distance au Soleil','2,87 Md km'],['Inclinaison','≈ 98°'],['Anneaux','13 connus']],life:"Aucune vie n’a été découverte sur Uranus. Son environnement est extrêmement froid et ne présente pas de surface solide accessible.",missions:[['1986','Voyager 2','Premier et unique survol rapproché d’Uranus; découverte de nouveaux anneaux, lunes et mesures de son champ magnétique.']],timeline:[['1781','Découverte moderne','William Herschel identifie Uranus comme une planète.'],['1986','Voyager 2','Premier survol rapproché et, à ce jour, seule visite d’un engin spatial près d’Uranus.']],highlights:['Uranus tourne avec une inclinaison d’environ 98 degrés.','Voyager 2 a découvert de nouvelles lunes et de nouveaux anneaux.','Les scientifiques dépendent encore largement des télescopes pour étudier Uranus.'],source:'https://science.nasa.gov/uranus/exploration/'},
+{name:'Neptune',type:'GÉANTE DE GLACE',class:'neptune',sun:'4,50 Md km',earth:'≈ 4,35 Md km',desc:"Neptune est la planète la plus éloignée du Soleil. Elle est connue pour ses vents extrêmement rapides et sa couleur bleue.",overview:"Neptune est une géante de glace lointaine et dynamique. Ses vents peuvent être extrêmement rapides et son atmosphère présente des tempêtes et des structures nuageuses complexes.",surfaceTitle:"Une planète balayée par les vents",surface:"Neptune ne possède pas de surface solide accessible. Son atmosphère est dominée par l’hydrogène, l’hélium et le méthane. Plus on descend, plus la pression et la température augmentent rapidement.",facts:[['Diamètre','≈ 49 244 km'],['Année','≈ 164,8 ans'],['Rotation','≈ 16 h'],['Distance au Soleil','4,50 Md km'],['Vents','Jusqu’à ~2 000 km/h'],['Lunes','14 connues']],life:"Aucune vie n’a été découverte sur Neptune. La planète elle-même est un environnement extrême; son intérêt en astrobiologie concerne surtout la compréhension des géantes de glace et de leurs systèmes de lunes.",missions:[['1989','Voyager 2','Premier et unique engin à avoir étudié Neptune de près; il a observé des tempêtes, des anneaux et des lunes.'],['Depuis 1990','Hubble','Les observations à distance suivent les tempêtes et les changements atmosphériques.'],['Depuis 2021','Webb','Le télescope spatial James Webb fournit de nouvelles observations infrarouges des anneaux et de l’atmosphère.']],timeline:[['1846','Découverte','Neptune est découverte après une prédiction fondée sur des perturbations orbitales d’Uranus.'],['1989','Voyager 2','Premier survol rapproché de Neptune et unique visite d’un engin spatial à ce jour.'],['1990+','Télescopes spatiaux','Hubble et d’autres observatoires suivent l’évolution de son atmosphère.']],highlights:['Neptune est la planète la plus éloignée du Soleil parmi les huit planètes.','Voyager 2 reste la seule mission à avoir observé Neptune de près.','Sa lune Triton possède une activité géologique remarquable et une atmosphère ténue.'],source:'https://science.nasa.gov/neptune/exploration/'}
+];
+
+let activePlanet=0;
+const planetList=document.getElementById('planetList');
+const planetStage=document.getElementById('planetStage');
+const planetTitle=document.getElementById('planetTitle');
+const planetDescription=document.getElementById('planetDescription');
+const planetType=document.getElementById('planetType');
+const planetReadMore=document.getElementById('planetReadMore');
+const planetTitleButton=document.getElementById('planetTitle');
+const planetDetail=document.getElementById('planetDetail');
+const detailBack=document.getElementById('detailBack');
+const detailVisual=document.getElementById('detailVisual');
+const detailKicker=document.getElementById('detailKicker');
+const detailTitle=document.getElementById('detailTitle');
+const detailLead=document.getElementById('detailLead');
+const detailNameInline=document.getElementById('detailNameInline');
+const detailOverview=document.getElementById('detailOverview');
+const detailFacts=document.getElementById('detailFacts');
+const detailSurfaceTitle=document.getElementById('detailSurfaceTitle');
+const detailSurface=document.getElementById('detailSurface');
+const detailTimeline=document.getElementById('detailTimeline');
+const detailMissions=document.getElementById('detailMissions');
+const detailLife=document.getElementById('detailLife');
+const detailNameBottom=document.getElementById('detailNameBottom');
+const detailHighlights=document.getElementById('detailHighlights');
+const detailSource=document.getElementById('detailSource');
+
+planetList.innerHTML=planets.map((p,i)=>`<button class="planet-nav-item ${i===0?'active':''}" data-index="${i}"><span class="mini-planet ${p.class}"></span><span><b>${p.name.toUpperCase()}</b><small>${p.sun.replace(' M km',' AU')}</small></span></button>`).join('');
+planetStage.innerHTML=planets.map((p,i)=>`<div class="space-planet ${p.class}" data-planet="${i}" aria-hidden="true"><div class="planet-surface"></div></div>`).join('');
+
+function relativePosition(i){
+  let d=i-activePlanet;
+  if(d>planets.length/2)d-=planets.length;
+  if(d<-planets.length/2)d+=planets.length;
+  return d;
+}
+function renderPlanetExperience(first=false){
+  const p=planets[activePlanet];
+  document.querySelectorAll('.space-planet').forEach((el,i)=>{
+    const d=relativePosition(i);
+    el.className=`space-planet ${planets[i].class} ${d===0?'is-active':d===-1?'is-prev':d===1?'is-next':'is-hidden'}`;
+    el.style.zIndex=String(20-Math.min(Math.abs(d),10));
+  });
+  document.querySelectorAll('.planet-nav-item').forEach((el,i)=>el.classList.toggle('active',i===activePlanet));
+  if(!first){
+    planetCopy.classList.remove('planet-copy-change');
+    void planetCopy.offsetWidth;
+    planetCopy.classList.add('planet-copy-change');
+  }
+  planetType.textContent=p.type;
+  planetTitle.textContent=p.name;
+  planetDescription.textContent=p.desc;
+  planetTitleButton.setAttribute('aria-label',`Ouvrir le dossier de ${p.name}`);
+}
+
+function openPlanetDetail(index=activePlanet){
+  const p=planets[index];
+  activePlanet=index;
+  renderPlanetExperience();
+  detailVisual.className=`detail-planet-visual ${p.class}`;
+  detailKicker.textContent=p.type;
+  detailTitle.textContent=p.name;
+  detailLead.textContent=p.desc;
+  detailNameInline.textContent=p.name;
+  detailNameBottom.textContent=p.name;
+  detailOverview.textContent=p.overview;
+  detailSurfaceTitle.textContent=p.surfaceTitle;
+  detailSurface.textContent=p.surface;
+  detailLife.textContent=p.life;
+  detailFacts.innerHTML=p.facts.map(([label,value])=>`<div><b>${value}</b><span>${label}</span></div>`).join('');
+  detailTimeline.innerHTML=p.timeline.map(([year,title,text])=>`<article class="timeline-item"><span class="timeline-year">${year}</span><div><h3>${title}</h3><p>${text}</p></div></article>`).join('');
+  detailMissions.innerHTML=p.missions.map(([year,title,text])=>`<article class="mission-item"><span>${year}</span><div><h3>${title}</h3><p>${text}</p></div></article>`).join('');
+  detailHighlights.innerHTML=p.highlights.map(x=>`<li>${x}</li>`).join('');
+  detailSource.href=p.source;
+  planetDetail.classList.remove('hidden');
+  planetDetail.setAttribute('aria-hidden','false');
+  document.body.classList.add('detail-open');
+  detailTitle.focus?.();
+  detailScrollTop();
+}
+function closePlanetDetail(){
+  planetDetail.classList.add('hidden');
+  planetDetail.setAttribute('aria-hidden','true');
+  document.body.classList.remove('detail-open');
+}
+function detailScrollTop(){
+  const scroller=planetDetail.querySelector('.detail-scroll');
+  if(scroller)scroller.scrollTop=0;
+}
+planetTitleButton.addEventListener('click',()=>openPlanetDetail(activePlanet));
+planetReadMore.addEventListener('click',()=>openPlanetDetail(activePlanet));
+detailBack.addEventListener('click',closePlanetDetail);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!planetDetail.classList.contains('hidden'))closePlanetDetail()});
+
+planetList.addEventListener('click' ,e=>{
+  const item=e.target.closest('.planet-nav-item');
+  if(!item)return;
+  const next=Number(item.dataset.index);
+  if(next===activePlanet)return;
+  activePlanet=next;
+  renderPlanetExperience();
+});
+renderPlanetExperience(true);
+
+function showAuth(register=false){home.classList.add('hidden');app.classList.add('hidden');auth.classList.remove('hidden');setTab(register)}
+function setTab(reg){loginPanel.classList.toggle('hidden',reg);registerPanel.classList.toggle('hidden',!reg);loginTab.classList.toggle('active',!reg);registerTab.classList.toggle('active',reg);authMsg.textContent=''}
+loginBtn.onclick=()=>showAuth(false);registerBtn.onclick=()=>showAuth(true);backHome.onclick=()=>{auth.classList.add('hidden');home.classList.remove('hidden')};loginTab.onclick=()=>setTab(false);registerTab.onclick=()=>setTab(true);
+goLoginContainerInit();
+function goLoginContainerInit(){const wait=setInterval(()=>{if(window.google&&google.accounts&&google.accounts.id){clearInterval(wait);initGoogle()}},100)}
+function initGoogle(){const clientId='587824895256-1lv526jhsqeage74c7rspku7ogr6sl2k.apps.googleusercontent.com';google.accounts.id.initialize({client_id:clientId,callback:handleGoogleCredential,auto_select:false});google.accounts.id.renderButton(document.getElementById('googleLogin'),{theme:'outline',size:'large',width:320,text:'continue_with'});google.accounts.id.renderButton(document.getElementById('googleRegister'),{theme:'outline',size:'large',width:320,text:'continue_with'})}
+function handleGoogleCredential(response){try{const payload=JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));enterApp(payload.name||'Google Account',payload.picture||'',payload.email||'')}catch(e){authMsg.textContent='La connexion Google n’a pas pu être finalisée.'}}
+function enterApp(name,photo,email){localStorage.setItem('solarUser',JSON.stringify({name,photo,email}));accountName.textContent=name;avatar.src=photo||'';auth.classList.add('hidden');home.classList.add('hidden');app.classList.remove('hidden')}
+emailRegister.onclick=()=>{const n=registerName.value.trim(),e=registerEmail.value.trim(),p=registerPassword.value;if(!n||!e||p.length<6){authMsg.textContent='Entre un nom, un Gmail valide et un mot de passe de 6 caractères minimum.';return}localStorage.setItem('solarLocalUser',JSON.stringify({name:n,email:e,password:p}));enterApp(n,'',e)};
+emailLogin.onclick=()=>{const u=JSON.parse(localStorage.getItem('solarLocalUser')||'null');if(!u||u.email!==loginEmail.value.trim()||u.password!==loginPassword.value){authMsg.textContent='Email ou mot de passe incorrect.';return}enterApp(u.name,'',u.email)};
+logout.onclick=()=>{localStorage.removeItem('solarUser');app.classList.add('hidden');home.classList.remove('hidden')};
+function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const target=document.getElementById(id);if(target){target.classList.add('active');target.scrollTop=0;}document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.section===id));}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>showSection(b.dataset.section));
+document.querySelectorAll('[data-go-section]').forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.goSection)));
+document.querySelectorAll('[data-open-planet]').forEach(b=>b.addEventListener('click',()=>{activePlanet=Number(b.dataset.openPlanet);showSection('planets');renderPlanetExperience();}));
+const saved=JSON.parse(localStorage.getItem('solarUser')||'null');if(saved)enterApp(saved.name,saved.photo,saved.email);
+</script>
+<!-- SOLAR AI CHAT -->
+<button id="solarChatFab" class="solar-chat-fab" type="button" aria-label="Ouvrir Solar AI">
+  <span class="solar-chat-icon">✦</span><span>Chat</span>
+</button>
+
+<section id="solarChat" class="solar-chat hidden" aria-hidden="true">
+  <div class="solar-chat-card">
+    <header class="solar-chat-head">
+      <div class="solar-ai-avatar">✦</div>
+      <div>
+        <strong>Solar AI</strong>
+        <small>Assistant du Système solaire</small>
+      </div>
+      <button id="solarChatClose" class="solar-chat-close" type="button" aria-label="Fermer">×</button>
+    </header>
+
+    <div id="solarChatMessages" class="solar-chat-messages">
+      <div class="solar-message ai">
+        <div class="solar-bubble">Bonjour ! 👋 Je suis <b>Solar AI</b>. Pose-moi une question sur les planètes, le Soleil, les lunes, les galaxies ou l’exploration spatiale.</div>
+      </div>
+      <div class="solar-chat-suggestions">
+        <button type="button">Quelle est la plus grande planète ?</button>
+        <button type="button">Parle-moi de Mars</button>
+        <button type="button">Pourquoi la Terre est habitable ?</button>
+      </div>
+    </div>
+
+    <div class="solar-chat-status" id="solarChatStatus"></div>
+    <form id="solarChatForm" class="solar-chat-form">
+      <button id="solarMic" class="solar-tool-btn" type="button" title="Parler" aria-label="Parler">🎙️</button>
+      <input id="solarChatInput" type="text" autocomplete="off" placeholder="Écris ta question à Solar AI…" aria-label="Message à Solar AI">
+      <button class="solar-send" type="submit" aria-label="Envoyer">➤</button>
+    </form>
+    <div class="solar-chat-note">Réponses basées sur les données intégrées à cette application. 🎙️ fonctionne avec la reconnaissance vocale de votre navigateur.</div>
+  </div>
+</section>
+
+<script>
+(function(){
+ const fab=document.getElementById('solarChatFab'), chat=document.getElementById('solarChat'), close=document.getElementById('solarChatClose'), form=document.getElementById('solarChatForm'), input=document.getElementById('solarChatInput'), msgs=document.getElementById('solarChatMessages'), status=document.getElementById('solarChatStatus'), mic=document.getElementById('solarMic');
+ if(!fab||!chat||!form) return;
+ const data={
+ soleil:'Le Soleil est une étoile au centre du Système solaire. Il contient environ 99,8 % de la masse du Système solaire.',
+ mercure:'Mercure est la planète la plus proche du Soleil et la plus petite du Système solaire. Une année y dure environ 88 jours terrestres.',
+ venus:'Vénus est la deuxième planète. Elle possède une atmosphère très épaisse et est la planète la plus chaude du Système solaire.',
+ terre:'La Terre est la troisième planète. Elle possède de l’eau liquide en surface et est actuellement la seule planète connue à abriter la vie.',
+ mars:'Mars est la quatrième planète, souvent appelée la planète rouge. Elle possède deux petites lunes : Phobos et Déimos.',
+ jupiter:'Jupiter est la plus grande planète du Système solaire. C’est une géante gazeuse et elle possède la célèbre Grande Tache rouge.',
+ saturne:'Saturne est une géante gazeuse célèbre pour ses magnifiques anneaux composés principalement de glace et de roches.',
+ uranus:'Uranus est une géante glacée. Son axe est fortement incliné, ce qui lui donne une rotation très particulière.',
+ neptune:'Neptune est la planète la plus éloignée du Soleil. C’est une géante glacée avec des vents extrêmement rapides.',
+ lune:'La Lune est le satellite naturel de la Terre. Elle influence notamment les marées terrestres.',
+ galaxie:'Une galaxie est un immense ensemble d’étoiles, de gaz, de poussière et de matière noire. La Voie lactée est notre galaxie.',
+ systeme:'Le Système solaire comprend le Soleil, huit planètes, leurs satellites naturels, des planètes naines, des astéroïdes et des comètes.'
+ };
+ function answer(q){let t=q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); for(const k in data){if(t.includes(k)) return data[k];} if(t.includes('plus grande')) return data.jupiter; if(t.includes('plus petite')) return data.mercure; if(t.includes('habitable')||t.includes('vie')) return 'La Terre est actuellement la seule planète connue à abriter la vie. Elle possède de l’eau liquide, une atmosphère adaptée et des conditions favorables à la vie telle que nous la connaissons.'; if(t.includes('combien')&&t.includes('planete')) return 'Il y a huit planètes dans le Système solaire : Mercure, Vénus, Terre, Mars, Jupiter, Saturne, Uranus et Neptune.'; return 'Je peux te renseigner sur le Soleil, les huit planètes, la Lune, les galaxies, les lunes, les astéroïdes, les comètes et l’exploration spatiale. Essaie par exemple : « Parle-moi de Mars ». ';}
+ function add(text,who){const row=document.createElement('div');row.className='solar-message '+who; const b=document.createElement('div');b.className='solar-bubble';b.textContent=text; row.appendChild(b); msgs.appendChild(row); msgs.scrollTop=msgs.scrollHeight;}
+ function open(){chat.classList.remove('hidden'); chat.setAttribute('aria-hidden','false'); setTimeout(()=>input.focus(),50);}
+ function shut(){chat.classList.add('hidden'); chat.setAttribute('aria-hidden','true');}
+ fab.addEventListener('click',open); close.addEventListener('click',shut);
+ form.addEventListener('submit',e=>{e.preventDefault(); const q=input.value.trim(); if(!q)return; add(q,'user'); input.value=''; status.textContent='Solar AI réfléchit…'; setTimeout(()=>{add(answer(q),'ai');status.textContent='';},350);});
+ msgs.querySelectorAll('.solar-chat-suggestions button').forEach(b=>b.addEventListener('click',()=>{input.value=b.textContent;form.requestSubmit();}));
+ if('SpeechRecognition' in window || 'webkitSpeechRecognition' in window){const R=window.SpeechRecognition||window.webkitSpeechRecognition; const r=new R();r.lang='fr-FR';r.interimResults=false;r.onstart=()=>status.textContent='Je vous écoute…';r.onresult=e=>{input.value=e.results[0][0].transcript;status.textContent='';};r.onerror=()=>status.textContent='Micro non disponible.';r.onend=()=>{if(status.textContent==='Je vous écoute…')status.textContent='';};mic.addEventListener('click',()=>r.start());} else {mic.addEventListener('click',()=>{status.textContent='La reconnaissance vocale n’est pas prise en charge par ce navigateur.';});}
+})();
+</script>
+</body></html>
