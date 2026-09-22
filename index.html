@@ -16,11 +16,6 @@
     <p>Découvre les planètes, le Soleil et les galaxies dans une expérience interactive pensée pour explorer l'espace.</p>
     <div class="actions"><button class="primary" id="loginBtn">Se connecter</button><button class="secondary" id="registerBtn">Créer un compte</button></div>
     <div class="quick">☉ Soleil &nbsp; • &nbsp; 8 planètes &nbsp; • &nbsp; Galaxies &nbsp; • &nbsp; Missions spatiales</div>
-    <div class="legal-links landing-legal">
-      <a href="/home">Accueil</a>
-      <a href="/privacy-policy">Politique de confidentialité</a>
-      <a href="/terms-of-use">Conditions d'utilisation</a>
-    </div>
   </main>
 </div>
 
@@ -107,11 +102,6 @@
       </div>
 
       <div class="welcome-source"><span>Sources & images</span><a href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener">NASA · Solar System Exploration →</a><a href="https://www.jpl.nasa.gov/images/" target="_blank" rel="noopener">NASA JPL · Image Gallery →</a></div>
-      <footer class="legal-footer">
-        <a href="/home">Accueil</a>
-        <a href="/privacy-policy">Politique de confidentialité</a>
-        <a href="/terms-of-use">Conditions d'utilisation</a>
-      </footer>
     </section>
 
     <section id="planets" class="section planets-experience">
@@ -381,4 +371,16 @@ const saved=JSON.parse(localStorage.getItem('solarUser')||'null');if(saved)enter
  if('SpeechRecognition' in window || 'webkitSpeechRecognition' in window){const R=window.SpeechRecognition||window.webkitSpeechRecognition; const r=new R();r.lang='fr-FR';r.interimResults=false;r.onstart=()=>status.textContent='Je vous écoute…';r.onresult=e=>{input.value=e.results[0][0].transcript;status.textContent='';};r.onerror=()=>status.textContent='Micro non disponible.';r.onend=()=>{if(status.textContent==='Je vous écoute…')status.textContent='';};mic.addEventListener('click',()=>r.start());} else {mic.addEventListener('click',()=>{status.textContent='La reconnaissance vocale n’est pas prise en charge par ce navigateur.';});}
 })();
 </script>
+<footer class="site-legal-footer" style="padding:28px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.12);background:#050812;color:#b9c4d8;position:relative;z-index:20">
+  <div style="max-width:1100px;margin:auto">
+    <strong style="color:#fff">ASTRO.WORLD</strong> · Solar System Explorer
+    <span style="margin:0 10px">•</span>
+    <a href="/home" style="color:#67d9ff;text-decoration:none">Accueil</a>
+    <span style="margin:0 10px">•</span>
+    <a href="/privacy-policy" style="color:#67d9ff;text-decoration:none">Politique de confidentialité</a>
+    <span style="margin:0 10px">•</span>
+    <a href="/terms-of-use" style="color:#67d9ff;text-decoration:none">Conditions d’utilisation</a>
+  </div>
+</footer>
+
 </body></html>
